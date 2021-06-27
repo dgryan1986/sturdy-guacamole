@@ -51,7 +51,7 @@ Delete these:
 ```
 secevent.evt
 sysevent.evt
-hppevent.evt
+appevent.evt
 ```
 Hide Evidence: 
 ```
