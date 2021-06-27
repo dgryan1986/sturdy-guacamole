@@ -133,7 +133,7 @@ You need to update the PwnDrop.ini file after install (Configuration to update y
 ```
 4th - 
 ```
-Go to 127.0.0.1:pwndrop <br>
+Go to 127.0.0.1:pwndrop
 ```
 5th -
 ```
@@ -231,8 +231,18 @@ MITMF (Man-in-the-middle-framework)
 Ettercap
 <br>
 
-# DNS Cache Poisoning - Ettercap
-Victim wants to go to Google.com | The attacker spoofs themself as the DNS server | Victim winds up going to a fake Google. 
+# DNS Cache Poisoning
+Ettercap: 
+Victim wants to go to Google.com | The attacker spoofs themself as the DNS server | Victim winds up going to a fake Google. <br>
+<br>
+Attacker sends his MAC to the victims ARP table and associates that with the Default Gateway. When the Victim wants to go to a domain the attacker receives the request and fowards it through the router to the internet. 
+
+MITM Attack: <br>
+ArpSpoof<br>
+SSLStrip<br>
+Replay Attack<br>
+SSL Downgrade<br>
+DNS Cache Poisoning
 
 # Network Access Control Bypass
 
