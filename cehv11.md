@@ -26,13 +26,6 @@ ARP Poisoning - Address Resolution Protocol (ARP) maps IP addresses to MAC addre
 
 Port Mirroring - Port mirroring can be challenging to set up, but is possible depending on the level of access you’ve been able to obtain to a network. The concept behind port mirroring, also known as SPAN port, is actually pretty simple. Port mirroring creates a duplicate of all network traffic on a port and sends it to another device. If all traffic from a target machine is directed through the switch to the server, you can implement port mirroring. Port mirroring ensures that any time the data comes through, it is duplicated and sent out to the attacker’s machine as well.<br>
 
-# CySA+ Methodologies & Info
-## Add Later
-
-
-
-
-
 # Covering Tracks:
 Delete these: 
 ```
