@@ -20,31 +20,201 @@ https://app.infosecinstitute.com/portal/skills/home | Sign up for the monthly de
 I will organize this better later on but for now it's just thoughts which will be later organized:
 
 # CEH Methodologies & Info
-<strong>5 Stages in Ethical Hacking:</strong> 
-<br>
+### 5 Stages in Ethical Hacking: 
 - Perform Recon -> Scanning & Enumeration -> Establishing Access -> Maintaining Access -> Clearing Tracks
 
-<strong>Penetration Testing Life Cycle:</strong>
-<br>
+### Penetration Testing Life Cycle:
 - Perform Recon -> Scanning & Enumeration -> Establishing Access -> Maintaining Access -> Reporting
 
-<strong>Penetration Testing Types:</strong>
-<br>
+### Penetration Testing Types
 - Blackbox (No Knowledge)<br>
 - White Box (Full Knowledge)<br>
 - Gray Box (Partial Knowledge)
 
-C.I.A Triad:
-<br>
+### C.I.A Triad:
 - Confidentiality - Prev. Unauth. Disclosure of Sensitive Data
 - Integrity - Prev. Unauth. Modification of Sensitive Data
 - Availability - Prev. Disruption of Service and Productivity
 
+### Sniffing
+MAC Spoofing - A common low-level security measure is port security. Port security allows only specific MAC addresses access to a switch. The goal is to ensure that only authorized devices have access to the network. A MAC address for a network interface card (NIC) is assigned by the manufacturer. This address is hard-coded directly into the NIC and can’t be changed. However, it is possible to change the MAC address of the interface driver. Let’s say you want to access a network, but the administrator has implemented port security measures. Thanks to your previous reconnaissance and scanning, you know that your target computer has access to the network, and you even know the MAC address. Using one of several software tools, you can spoof your computer’s MAC address to look like the target’s MAC address, and you can connect directly to the network with minimal effort.<br>
+
+MAC Flooding - When a switch is initially turned on, it doesn’t know which devices it’s going to be supporting. A switch tracks MAC addresses in a content addressable memory (CAM) table. As it receives packets from various MAC addresses, it adds the addresses to its CAM table and associates each one with a physical port on the switch. This process allows data to be sent directly to the port where the intended recipient is located instead of sending all data across the entire network like a hub. Although one port can have multiple MAC addresses associated with it, the CAM table is only so big. As a hacker, you can use a method called MAC flooding to intentionally flood the CAM table with Ethernet frames, each originating from different MAC addresses. Once the table starts to overflow, the switch responds by broadcasting all incoming data to all ports, basically turning itself into a hub instead of a switch. Since your MAC address is now connected to one of the ports, you are able to capture all traffic as it is broadcast across the network.
+<br>
+
+ARP Poisoning - Address Resolution Protocol (ARP) maps IP addresses to MAC addresses and provides the most efficient path for data transmission. ARP broadcasts are permitted to freely roam around the network. You can use this free flow of traffic to your advantage. By sending spoofed messages onto a network, you can associate your MAC address with the IP address of another host, preferably the default gateway. As a result, the target machine will send frames to your system, thinking that you are their gateway, before you forward them on to the original destination.
+<br>
+
+Port Mirroring - Port mirroring can be challenging to set up, but is possible depending on the level of access you’ve been able to obtain to a network. The concept behind port mirroring, also known as SPAN port, is actually pretty simple. Port mirroring creates a duplicate of all network traffic on a port and sends it to another device. If all traffic from a target machine is directed through the switch to the server, you can implement port mirroring. Port mirroring ensures that any time the data comes through, it is duplicated and sent out to the attacker’s machine as well.<br>
+
+# CySA+ Methodologies & Info
+## Add Later
 
 
 # CompTIA Pentest+ Methodologies & Info
 
-# CySA+ Methodologies & Info
+## Planning and Scoping - Domain 1
+
+## Information Gathering - Domain 2
+### Enumeration <br>
+Types of enumeration
+- Hosts
+- Networks
+- Domains
+- Users/Groups
+- Network shares
+- Web pages
+- Applications
+- Services
+- Tokens
+- Social Networks
+
+# Fingerprinting
+## Banner Grabbing
+
+# Cryptographic Inspection
+## Check SSL certs (SSL 2.0, 3.0, or TLS)
+Tools to automize this: 
+- SSLyze
+
+# Eavesdropping
+## Wired or Wireless Networks
+- In scope?
+- Capture RF, WiFi, Bluetooth
+
+# Decompiling and Debugging
+### Reverse Engineering Software
+
+# OSINT - Open Source Intelligence
+### Ability of a pentester to keep up to date with latest techniques & vulnerabilities.
+- Computer Emergency Response Team (CERT)
+- Japans CERT 
+- NIST
+- Common Vuln. & Exposures (CVE) 
+- Common Weakness Enumeration (CWE)
+- Common Attack Pattern Enumeration & Classification (CAPEC)
+- Full Disclosure list NMAP
+
+# Vunerability Scanning
+### Credentialized vs non-credentialized scans
+#### Credentialized 
+- Scanner uses an authorized user or admin account
+- Closer to the system admins perspective
+#### Non-credentialized
+- Scanner doesn't have a user or admin account
+- Closer to the hackers perspective
+
+### Compliance Scan
+- Used to identify vuln. that may affect compliance with regs. or policies.
+- Commonly setup as a scanning template in your vuln. scanner (PCI-DSS)
+- Requires both internal and external scanning to be performed
+
+### Fragile or non-traditional systems | Factory machines, etc.
+- Should we scan these?
+- Should we exempt these?
+
+### Application Scanning
+#### Dynamic Analysis
+- Occurs while a program is running, ran in a sandbox
+
+#### Static Anaylysis
+- Performed in a non-runtime environment
+- Inspects programming code for flaws/vulnerabilities
+- Line by line inspection can be performed
+
+#### Containers
+- Containers are like micro VMs
+- Requires less resources than a typical VM
+- Docker, Puppet, Vagrant
+- If an OS vuln is found, it will apply to all containers 
+
+### Analyzing Vuln. Scans
+#### Asset Categorization
+- Categorize by OS or Function
+- Ideally identify high-value assets
+  - Domain Controllers
+  - Web Servers
+  - Databases 
+
+#### Common Themes
+- Vulnerabilies 
+  - Same on many hosts?
+- Observations
+  - Do you see the same types of OS and Apps being used net wide.
+- Lack of Best Practices
+  - Common misconfigurations
+  - Weak Passwords
+  - Poor Security Practices
+  - Logging disabled    
+
+### Tools
+- QualysGuard
+- OpenVAS
+- Nessus
+- Nikto
+- Nexpose
+
+# Preparing for Exploitation
+Map Vulnerabilites <br>
+Prioritize efforts for pentest<br>
+
+#### Common Attack Techniques
+Basics:
+- Cross-compiling code
+  - Exploits for Windows can be compiled on Linux using tools like Mingw-w64 
+- Exploit mods
+  - Encrypting or encoding anti-virus detections 
+- Exploit chaining
+  - Layering exploits
+  - Bypass the firewall 
+- Proof-of-concept dev.
+  - New or custom exploits 
+  - Create Virtual Environment 
+- Social Engineering
+  - Manipulating people to get info 
+- Credential brute forcing
+  - Attempt to crack a password or auth system 
+- Dictionary attacks
+  - Set username or passwords 
+- Rainbow tables
+  - CrackStation.net
+- Deception
+
+#### Weaknesses in Specialized Systems
+Old engineering stuff like:
+- ICS - Industry Control Systems
+- PLC - Programmable Logic Controller
+- SCADA - Supervisory Control and Data Acquisition
+
+Mobile Devices
+- Lack of updates (Android)
+- Root/Jailbreak (iPhone)
+- 3rd part apps
+- Bluetooth, NFC, WiFi
+- No Device Management
+
+IoT
+- These have super low security and you can get Malware on there easily.
+- Shodan!
+
+Embedded Devices
+- ICS/SCADA 
+- Cars have it
+
+Point-of-Sale (POS)
+- Used in registers in stores and rest.
+
+Biometrics
+- Fingers can be lifted off coke can
+- FaceID is 20x stronger than fingerprint
+
+Real-Time Operating Systems (RTOS)
+- Usually found in embedded systems
+- Security is not a concern during dev.
+- Usually stripped down version of Linux
+- Uses limited resources on the machine and can be subjected easily to attacks
+
+
 
 # Covering Tracks:
 Delete these: 
@@ -336,16 +506,7 @@ listening on eth1
 # SMAC 2.0 | GUI
 You can use this for spoofing MAC addresses on a network.
 
-# Sniffing
-MAC Spoofing - A common low-level security measure is port security. Port security allows only specific MAC addresses access to a switch. The goal is to ensure that only authorized devices have access to the network. A MAC address for a network interface card (NIC) is assigned by the manufacturer. This address is hard-coded directly into the NIC and can’t be changed. However, it is possible to change the MAC address of the interface driver. Let’s say you want to access a network, but the administrator has implemented port security measures. Thanks to your previous reconnaissance and scanning, you know that your target computer has access to the network, and you even know the MAC address. Using one of several software tools, you can spoof your computer’s MAC address to look like the target’s MAC address, and you can connect directly to the network with minimal effort.<br>
 
-MAC Flooding - When a switch is initially turned on, it doesn’t know which devices it’s going to be supporting. A switch tracks MAC addresses in a content addressable memory (CAM) table. As it receives packets from various MAC addresses, it adds the addresses to its CAM table and associates each one with a physical port on the switch. This process allows data to be sent directly to the port where the intended recipient is located instead of sending all data across the entire network like a hub. Although one port can have multiple MAC addresses associated with it, the CAM table is only so big. As a hacker, you can use a method called MAC flooding to intentionally flood the CAM table with Ethernet frames, each originating from different MAC addresses. Once the table starts to overflow, the switch responds by broadcasting all incoming data to all ports, basically turning itself into a hub instead of a switch. Since your MAC address is now connected to one of the ports, you are able to capture all traffic as it is broadcast across the network.
-<br>
-
-ARP Poisoning - Address Resolution Protocol (ARP) maps IP addresses to MAC addresses and provides the most efficient path for data transmission. ARP broadcasts are permitted to freely roam around the network. You can use this free flow of traffic to your advantage. By sending spoofed messages onto a network, you can associate your MAC address with the IP address of another host, preferably the default gateway. As a result, the target machine will send frames to your system, thinking that you are their gateway, before you forward them on to the original destination.
-<br>
-
-Port Mirroring - Port mirroring can be challenging to set up, but is possible depending on the level of access you’ve been able to obtain to a network. The concept behind port mirroring, also known as SPAN port, is actually pretty simple. Port mirroring creates a duplicate of all network traffic on a port and sends it to another device. If all traffic from a target machine is directed through the switch to the server, you can implement port mirroring. Port mirroring ensures that any time the data comes through, it is duplicated and sent out to the attacker’s machine as well.<br>
 
 # Countermeasures for Sniffing
 Write packet capture files from interface 1 into mycap.pcap
