@@ -390,6 +390,11 @@ IPsec Protocols:
 - Transport Mode: Client -> Client
 - Tunnel Mode: Gateway -> Gateway
 
+There are several protocols within the IPsec architecture, including:
+- The Internet Key Exchange (IKE), which creates the encryption keys.
+- Authentication Header (AH), which authenticates the packets' sender.
+- Encapsulating Security Payload (ESP), which provides sender authentication and encryption.
+
 # IDS, Firewalls, and Honeypots
 
 # Web Servers, Web Applications, and SQL Injections
