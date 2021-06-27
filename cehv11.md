@@ -278,17 +278,17 @@ Globe -> ARP Poisoning
 Sniff Remote Connections (popup)
 root# service apache2 start
 ```
-Session Hijacking:
+Session Hijacking | DHCP Spoofing:
 ```
 open ettercap
 Select Unified Sniffing
 Primary Interface -> eth*
 Select MITM
-DNS Spoofing
-Enter Default Gateway
+DHCP Spoofing
+Enter Netmask
 Enter DNS Server
 Have the Victim Release/Renew somehow... ipconfig /release /renew
-They go to the website enter credentials, ettercap receives the session ID
+They go to the website enter credentials, ettercap receives the credentials and session ID
 Copy session ID cookie and enter it into Chrome for you
 ```
 
