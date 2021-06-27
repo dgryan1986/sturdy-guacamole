@@ -382,6 +382,14 @@ TCP/IP Session Hijacking:
 - Desync client session
 - Take over the session
 
+#### Countermeasures for Session Hijacking
+IPsec Protocols:
+- Internet Key Exchange
+- Authentication Header
+- Encapsulation Security Payload
+- Transport Mode: Client -> Client
+- Tunnel Mode: Gateway -> Gateway
+
 # IDS, Firewalls, and Honeypots
 
 # Web Servers, Web Applications, and SQL Injections
