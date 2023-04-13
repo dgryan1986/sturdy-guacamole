@@ -424,10 +424,6 @@ https://www.syhunt.com/en/?n=Products.SyhuntDynamic
 
 https://proxmark.com/
 
-![image](https://user-images.githubusercontent.com/6215802/231816221-de4783f3-7d45-4d8e-a093-6f5e29345de9.png)
-
-
-
 # Most Test$ R0lled into 0ne
 Tools &amp; Notes I like or need for System Security and/or Hacking
 
