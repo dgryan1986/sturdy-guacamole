@@ -1,3 +1,6 @@
+# I have tons of Hacking Bookmarks that I wanted to share which I have found over the years for my pen testing hobby
+
+
 # Most Test$ R0lled into 0ne
 Tools &amp; Notes I like or need for System Security and/or Hacking
 
