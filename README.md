@@ -1,6 +1,6 @@
 # Hacking Bookmarks
 Which I have found over the years for my pen testing hobby
-
+```
 https://www.exploit-db.com/
 
 https://www.kali.org/
@@ -365,6 +365,7 @@ https://howsecureismypassword.net/
 https://pimeyes.com/en
 
 https://github.com/htr-tech/zphisher
+
 https://github.com/DarkSecDevelopers
 
 https://github.com/Undeadsec
@@ -378,6 +379,7 @@ https://hackerwarehouse.com/
 https://o.mg.lol/
 
 https://www.pcbway.com/?code=CC
+
 https://www.intigriti.com/
 
 https://attack.mitre.org/
@@ -423,6 +425,7 @@ https://www.httrack.com/
 https://www.syhunt.com/en/?n=Products.SyhuntDynamic
 
 https://proxmark.com/
+```
 
 # Most Test$ R0lled into 0ne
 Tools &amp; Notes I like or need for System Security and/or Hacking
