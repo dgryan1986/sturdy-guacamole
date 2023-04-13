@@ -2,11 +2,17 @@
 Which I have found over the years for my pen testing hobby
 
 https://www.exploit-db.com/
+
 https://www.kali.org/
+
 https://moxie.org/software/sslstrip/
+
 http://www.irongeek.com/i.php?page=security/AQuickIntrotoSniffers
+
 http://www.oxid.it/cain.html
+
 http://www.tecmint.com/monitor-ethernet-activity-in-linux/
+
 http://sniffdet.sourceforge.net/
 http://embeddedsw.net/OpenPuff_Steganography_Home.html
 https://www.cvedetails.com/top-50-products.php?year=0
